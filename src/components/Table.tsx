@@ -203,7 +203,7 @@ export default function Table({ spread, onExit }: Props) {
                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && remaining > 0 && dealNext()}>
             {[0, 1, 2].map((i) => (
               <div key={i} className="deck-card" style={{ transform: `translate(${(i - 1) * 9}px, ${-(i - 1) * 7}px) rotate(${(i - 1) * 3}deg)`, zIndex: i }}>
-                <CardFace card={CARDS[0]} faceDown width={168} />
+                <CardFace card={CARDS[0]} faceDown />
               </div>
             ))}
           </div>

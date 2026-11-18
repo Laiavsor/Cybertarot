@@ -101,7 +101,6 @@ const MINOR_IMAGE: Record<string, string> = {
   'banks-5': 'cards/minor/banks-5.jpg',
   'wires-1': 'cards/minor/wires-1.jpg',
   'nuyen-1': 'cards/minor/nuyen-1.jpg',
-  'swords-12': 'cards/minor/swords-12.jpg',
 };
 
 export const MAJOR_NUMERALS = [

@@ -1,0 +1,63 @@
+name: Release APK
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci --no-audit --no-fund
+
+      - name: Build web app
+        run: npm run build
+
+      - name: Sync Capacitor Android
+        run: npx cap sync android
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build debug APK
+        run: cd android && chmod +x gradlew && ./gradlew assembleDebug --no-daemon
+
+      - name: Rename APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk cybertarot-debug.apk
+
+      - name: Write release notes
+        run: |
+          cat > RELEASE_NOTES.md <<'EOF'
+Первый публичный релиз CyberTarot — нейро-оракула нового города.
+
+Что внутри:
+- 78 карт нейро-арта в микс-стиле Cyberpunk 2077 × Shadowrun (22 старших + 56 младших: Мечи / Банки / Провода / Ньюены)
+- 5 раскладов: Быстрый Хак · Нейролинк · Полный Дамп · Малый Крест · Выбор
+- Расклад «Выбор» сам сравнивает два пути (перевёрнутые карты, старшие арканы)
+- Русские толкования, нейро-арт, офлайн (работает без сети)
+- Пасхалка: 7 тапов по крутящемуся знаку на стартовом экране
+
+Установка: скачай cybertarot-debug.apk, разреши установку из неизвестных источников, установи.
+
+Сборка debug (debug-ключ Android), не подписана релизным ключом — Play Protect может предупредить; это нормально для открытой раздачи.
+EOF
+
+      - name: Create release & upload APK
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "$GITHUB_REF_NAME" cybertarot-debug.apk --title "CyberTarot $GITHUB_REF_NAME — Неоновый оракул" --notes-file RELEASE_NOTES.md

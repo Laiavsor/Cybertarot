@@ -130,6 +130,13 @@ const MINOR_IMAGE: Record<string, string> = {
   'nuyen-5': 'cards/minor/nuyen-5.jpg',
   'nuyen-6': 'cards/minor/nuyen-6.jpg',
   'nuyen-7': 'cards/minor/nuyen-7.jpg',
+  'nuyen-8': 'cards/minor/nuyen-8.jpg',
+  'nuyen-9': 'cards/minor/nuyen-9.jpg',
+  'nuyen-10': 'cards/minor/nuyen-10.jpg',
+  'nuyen-11': 'cards/minor/nuyen-11.jpg',
+  'nuyen-12': 'cards/minor/nuyen-12.jpg',
+  'nuyen-13': 'cards/minor/nuyen-13.jpg',
+  'nuyen-14': 'cards/minor/nuyen-14.jpg',
 };
 
 export const MAJOR_NUMERALS = [

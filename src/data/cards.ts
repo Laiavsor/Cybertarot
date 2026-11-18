@@ -119,7 +119,17 @@ const MINOR_IMAGE: Record<string, string> = {
   'wires-8': 'cards/minor/wires-8.jpg',
   'wires-9': 'cards/minor/wires-9.jpg',
   'wires-10': 'cards/minor/wires-10.jpg',
+  'wires-11': 'cards/minor/wires-11.jpg',
+  'wires-12': 'cards/minor/wires-12.jpg',
+  'wires-13': 'cards/minor/wires-13.jpg',
+  'wires-14': 'cards/minor/wires-14.jpg',
   'nuyen-1': 'cards/minor/nuyen-1.jpg',
+  'nuyen-2': 'cards/minor/nuyen-2.jpg',
+  'nuyen-3': 'cards/minor/nuyen-3.jpg',
+  'nuyen-4': 'cards/minor/nuyen-4.jpg',
+  'nuyen-5': 'cards/minor/nuyen-5.jpg',
+  'nuyen-6': 'cards/minor/nuyen-6.jpg',
+  'nuyen-7': 'cards/minor/nuyen-7.jpg',
 };
 
 export const MAJOR_NUMERALS = [

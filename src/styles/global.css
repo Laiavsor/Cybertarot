@@ -191,7 +191,33 @@ body {
   text-shadow: 0 0 10px rgba(0,240,255,.7); animation: ctaBlink 1.15s infinite steps(1);
 }
 @keyframes ctaBlink { 0%,100% { opacity: 1; box-shadow: 0 0 22px rgba(0,240,255,.25), inset 0 0 14px rgba(0,240,255,.15);} 50% { opacity: .55; box-shadow: none; } }
-.boot-mandala { opacity: .9; filter: drop-shadow(0 0 18px rgba(0,240,255,.35)) drop-shadow(0 0 44px rgba(255,46,166,.2)); animation: slowSpin 28s linear infinite; }
+.boot-mandala { opacity: .9; filter: drop-shadow(0 0 18px rgba(0,240,255,.35)) drop-shadow(0 0 44px rgba(255,46,166,.2)); animation: slowSpin 28s linear infinite; cursor: pointer; }
+
+/* пасхалка: подпись автора вместо крутящегося знака */
+.sig-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; min-height: 120px; justify-content: center; }
+.sig-symbol {
+  font-family: var(--font-display); font-size: clamp(84px, 22vw, 128px); line-height: 1;
+  letter-spacing: .02em; color: #fff6e0;
+  text-shadow: 0 0 14px rgba(255,176,0,.85), 0 0 46px rgba(255,46,166,.65), 0 0 90px rgba(0,240,255,.5);
+  animation: sigSymbolIn 1.15s cubic-bezier(.2,.9,.25,1.15) both;
+}
+@keyframes sigSymbolIn {
+  0% { transform: scale(.2) rotate(-14deg); opacity: 0; filter: blur(6px); }
+  60% { transform: scale(1.18) rotate(3deg); opacity: 1; filter: blur(0); }
+  100% { transform: scale(1) rotate(0); }
+}
+.sig-symbol--settle { animation: sigSettle 2.4s ease-in-out infinite; }
+@keyframes sigSettle {
+  0%, 100% { text-shadow: 0 0 14px rgba(255,176,0,.85), 0 0 46px rgba(255,46,166,.65), 0 0 90px rgba(0,240,255,.5); }
+  50% { text-shadow: 0 0 20px rgba(255,176,0,1), 0 0 66px rgba(255,46,166,.85), 0 0 120px rgba(0,240,255,.7); }
+}
+.sig-credit {
+  font-family: var(--font-mono); text-align: center; color: var(--amber);
+  font-size: 11px; letter-spacing: .22em; line-height: 1.9; text-transform: uppercase;
+  animation: sigCreditIn 1s ease-out both;
+}
+.sig-credit b { color: var(--cyan); font-weight: 500; text-shadow: 0 0 12px rgba(0,240,255,.55); }
+@keyframes sigCreditIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @keyframes slowSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 
 /* ───────── Главное меню ───────── */

@@ -82,6 +82,14 @@ const MAJOR_IMAGE: Record<number, string> = {
 /* Нейро-арт младших (постепенно заменяет процедурный SVG) */
 const MINOR_IMAGE: Record<string, string> = {
   'swords-1': 'cards/minor/swords-1.jpg',
+  'swords-2': 'cards/minor/swords-2.jpg',
+  'swords-3': 'cards/minor/swords-3.jpg',
+  'swords-4': 'cards/minor/swords-4.jpg',
+  'swords-5': 'cards/minor/swords-5.jpg',
+  'swords-6': 'cards/minor/swords-6.jpg',
+  'swords-7': 'cards/minor/swords-7.jpg',
+  'swords-8': 'cards/minor/swords-8.jpg',
+  'swords-9': 'cards/minor/swords-9.jpg',
   'banks-1': 'cards/minor/banks-1.jpg',
   'wires-1': 'cards/minor/wires-1.jpg',
   'nuyen-1': 'cards/minor/nuyen-1.jpg',

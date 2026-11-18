@@ -97,6 +97,26 @@ export function buildReading(question: string, spread: SpreadDef, draws: DrawInp
     summary.push(`Сквозные частоты: ${themes.join(' · ')}. Именно они повторяются по всему дампу — отнесись к ним как к подсказке маршрутизатора.`);
   }
 
+  // Развилка «ВЫБОР» — сравнение двух путей
+  if (spread.id === 'choice') {
+    const byId = Object.fromEntries(draws.map((d) => [d.position.id, d])) as Record<string, DrawInput | undefined>;
+    const aStack = [byId['gainA'], byId['costA']].filter((d): d is DrawInput => Boolean(d));
+    const bStack = [byId['gainB'], byId['costB']].filter((d): d is DrawInput => Boolean(d));
+    const aRev = aStack.filter((d) => d.reversed).length;
+    const bRev = bStack.filter((d) => d.reversed).length;
+    if (aRev !== bRev) {
+      summary.push(aRev > bRev
+        ? 'Путь А идёт с перевёрнутыми картами — тревожные сигналы по нему; путь Б звучит чище.'
+        : 'Путь Б идёт с перевёрнутыми картами — внимательнее к его подводным камням; путь А звучит чище.');
+    }
+    const aMaj = aStack.filter((d) => d.card.arcana === 'major').length;
+    const bMaj = bStack.filter((d) => d.card.arcana === 'major').length;
+    if (aMaj + bMaj > 0) {
+      const heavier = aMaj === bMaj ? 'обоих путей' : (aMaj > bMaj ? 'пути А' : 'пути Б');
+      summary.push(`Старший аркан лежит на ${heavier}: этот выбор крупнее, чем кажется на схеме.`);
+    }
+  }
+
   // Финальный приговор — детерминированный выбор по составу расклада
   const seed = draws.reduce((acc, d) => acc + d.card.id.length * (d.reversed ? 3 : 7), 0) + total * 13;
   const verdict = VERDICTS[seed % VERDICTS.length];

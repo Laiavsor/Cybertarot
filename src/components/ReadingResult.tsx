@@ -61,16 +61,7 @@ export default function ReadingResult({ spread, question, draws, onCardTap, onSa
     </div>
   );
 
-  const renderSpread = () => {
-    if (spread.id === 'hack') {
-      return <div style={{ display: 'flex', justifyContent: 'center', padding: '6px 0 2px' }}>
-        <CardFace card={draws[0].card} reversed={draws[0].reversed} onClick={() => onCardTap(draws[0])} width={220} />
-      </div>;
-    }
-    if (spread.id === 'neurolink') {
-      return <div className="slots-area" style={{ paddingTop: 4 }}>{draws.map((d) => renderSlot(d))}</div>;
-    }
-    // Кельтский крест
+  const renderCross = (withStaff: boolean) => {
     const byId = Object.fromEntries(draws.map((d) => [d.position.id, d]));
     const core = byId['core'], crossing = byId['crossing'];
     return (
@@ -85,16 +76,60 @@ export default function ReadingResult({ spread, question, draws, onCardTap, onSa
                 <CardFace card={crossing.card} reversed={crossing.reversed} onClick={() => onCardTap(crossing)} />
               </div>
             </div>
-            <div className="slot-label"><div className="t">Ядро × Помеха</div><div className="s">CORE × CROSSING</div></div>
+            <div className="slot-label"><div className="t">Суть × Помеха</div><div className="s">CORE × CROSSING</div></div>
           </div>
           {renderSlot(byId['vector'], 'cc-future')}
           {renderSlot(byId['foundation'], 'cc-base')}
         </div>
-        <div className="celtic-staff">
-          {(['output', 'hidden', 'perimeter', 'line'] as const).map((id) => renderSlot(byId[id]))}
+        {withStaff && (
+          <div className="celtic-staff">
+            {(['output', 'hidden', 'perimeter', 'line'] as const).map((id) => renderSlot(byId[id]))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderChoice = () => {
+    const byId = Object.fromEntries(draws.map((d) => [d.position.id, d]));
+    return (
+      <div className="fork-layout">
+        <div className="fork-essence">{renderSlot(byId['essence'])}</div>
+        <div className="fork-paths">
+          <div className="fork-col fork-a">
+            <div className="fork-col-tag">ПУТЬ А</div>
+            {renderSlot(byId['gainA'])}
+            {renderSlot(byId['costA'])}
+          </div>
+          <div className="fork-vs">ИЛИ</div>
+          <div className="fork-col fork-b">
+            <div className="fork-col-tag">ПУТЬ Б</div>
+            {renderSlot(byId['gainB'])}
+            {renderSlot(byId['costB'])}
+          </div>
+        </div>
+        <div className="fork-bottom">
+          {renderSlot(byId['advice'])}
+          {renderSlot(byId['outcome'])}
         </div>
       </div>
     );
+  };
+
+  const renderSpread = () => {
+    if (spread.id === 'hack') {
+      return <div style={{ display: 'flex', justifyContent: 'center', padding: '6px 0 2px' }}>
+        <CardFace card={draws[0].card} reversed={draws[0].reversed} onClick={() => onCardTap(draws[0])} width={220} />
+      </div>;
+    }
+    if (spread.id === 'neurolink') {
+      return <div className="slots-area" style={{ paddingTop: 4 }}>{draws.map((d) => renderSlot(d))}</div>;
+    }
+    // Кельтский крест — полный и малый
+    if (spread.id === 'dump') return renderCross(true);
+    if (spread.id === 'smallcross') return renderCross(false);
+    // Выбор — вилка путей
+    return renderChoice();
   };
 
   return (

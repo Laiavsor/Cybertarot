@@ -139,49 +139,84 @@ export default function Table({ spread, onExit }: Props) {
     );
   };
 
-  const renderSlots = () => {
-    if (spread.id === 'dump') {
-      const [core, crossing, root, vector, crown, foundation, line, perimeter, hidden, output] = spread.positions;
-      return (
-        <div className="celtic">
-          <div className="celtic-cross">
-            {renderCell(crown, 'cc-crown')}
-            {renderCell(root, 'cc-past')}
-            <div className="cc-slot cc-core">
-              <div className="celtic-core-wrap">
-                {drawnById['core'] ? (
-                  <CardFace card={drawnById['core'].card} reversed={drawnById['core'].reversed} dealt glitching={glitchId === 'core'} onClick={() => setDetail(drawnById['core'])} />
-                ) : (
-                  <div className={`slot ${nextPos?.id === 'core' ? 'next' : ''}`} style={{ width: 'auto' }}>
-                    <div className="slot-frame">01</div>
+  const renderCross = (withStaff: boolean) => {
+    if (spread.id !== 'dump' && spread.id !== 'smallcross') return <></>;
+    const [corePos, crossingPos, rootPos, vectorPos, crownPos, foundationPos] = spread.positions;
+    const staff = withStaff ? spread.positions.slice(6).reverse() : [];
+    return (
+      <div className="celtic">
+        <div className="celtic-cross">
+          {renderCell(crownPos, 'cc-crown')}
+          {renderCell(rootPos, 'cc-past')}
+          <div className="cc-slot cc-core">
+            <div className="celtic-core-wrap">
+              {drawnById['core'] ? (
+                <CardFace card={drawnById['core'].card} reversed={drawnById['core'].reversed} dealt glitching={glitchId === 'core'} onClick={() => setDetail(drawnById['core'])} />
+              ) : (
+                <div className={`slot ${nextPos?.id === 'core' ? 'next' : ''}`} style={{ width: 'auto' }}>
+                  <div className="slot-frame">01</div>
+                </div>
+              )}
+              {drawnById['crossing'] ? (
+                <div className="cc-crossing">
+                  <CardFace card={drawnById['crossing'].card} reversed={drawnById['crossing'].reversed} dealt glitching={glitchId === 'crossing'} onClick={() => setDetail(drawnById['crossing'])} />
+                </div>
+              ) : (
+                <div className="cc-crossing">
+                  <div className={`slot ${nextPos?.id === 'crossing' ? 'next' : ''}`} style={{ width: '100%', height: '100%' }}>
+                    <div className="slot-frame" style={{ width: '100%', height: '100%' }}>02</div>
                   </div>
-                )}
-                {drawnById['crossing'] ? (
-                  <div className="cc-crossing">
-                    <CardFace card={drawnById['crossing'].card} reversed={drawnById['crossing'].reversed} dealt glitching={glitchId === 'crossing'} onClick={() => setDetail(drawnById['crossing'])} />
-                  </div>
-                ) : (
-                  <div className="cc-crossing">
-                    <div className={`slot ${nextPos?.id === 'crossing' ? 'next' : ''}`} style={{ width: '100%', height: '100%' }}>
-                      <div className="slot-frame" style={{ width: '100%', height: '100%' }}>02</div>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div className="slot-label">
-                <div className="t">Ядро × Помеха</div>
-                <div className="s">CORE × CROSSING</div>
-              </div>
+                </div>
+              )}
             </div>
-            {renderCell(vector, 'cc-future')}
-            {renderCell(foundation, 'cc-base')}
+            <div className="slot-label">
+              <div className="t">Суть × Помеха</div>
+              <div className="s">CORE × CROSSING</div>
+            </div>
           </div>
+          {renderCell(vectorPos, 'cc-future')}
+          {renderCell(foundationPos, 'cc-base')}
+        </div>
+        {staff.length > 0 && (
           <div className="celtic-staff">
-            {[output, hidden, perimeter, line].map((p) => renderCell(p))}
+            {staff.map((p) => renderCell(p))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderChoice = () => {
+    if (spread.id !== 'choice') return <></>;
+    const [essence, gainA, costA, gainB, costB, advice, outcome] = spread.positions;
+    return (
+      <div className="fork-layout">
+        <div className="fork-essence">{renderCell(essence)}</div>
+        <div className="fork-paths">
+          <div className="fork-col fork-a">
+            <div className="fork-col-tag">ПУТЬ А</div>
+            {renderCell(gainA)}
+            {renderCell(costA)}
+          </div>
+          <div className="fork-vs">ИЛИ</div>
+          <div className="fork-col fork-b">
+            <div className="fork-col-tag">ПУТЬ Б</div>
+            {renderCell(gainB)}
+            {renderCell(costB)}
           </div>
         </div>
-      );
-    }
+        <div className="fork-bottom">
+          {renderCell(advice)}
+          {renderCell(outcome)}
+        </div>
+      </div>
+    );
+  };
+
+  const renderSlots = () => {
+    if (spread.id === 'dump') return renderCross(true);
+    if (spread.id === 'smallcross') return renderCross(false);
+    if (spread.id === 'choice') return renderChoice();
     return <div className="slots-area">{spread.positions.map((p) => renderCell(p))}</div>;
   };
 
@@ -218,7 +253,7 @@ export default function Table({ spread, onExit }: Props) {
         </div>
 
         {/* Слоты */}
-        {spread.id === 'dump' ? (
+        {spread.id === 'dump' || spread.id === 'smallcross' || spread.id === 'choice' ? (
           <div style={{ padding: '6px 2px', overflowX: 'auto' }}>{renderSlots()}</div>
         ) : (
           <div className="slots-area" style={{ paddingTop: 6 }}>{renderSlots()}</div>

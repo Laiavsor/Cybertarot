@@ -6,7 +6,7 @@ export interface SpreadPosition {
   hint: string;  // русская подсказка под слотом
 }
 export interface SpreadDef {
-  id: 'hack' | 'neurolink' | 'dump';
+  id: 'hack' | 'neurolink' | 'dump' | 'smallcross' | 'choice';
   num: string;
   title: string;
   titleEn: string;
@@ -58,6 +58,39 @@ export const SPREADS: SpreadDef[] = [
       { id: 'perimeter', title: 'Периметр', sub: 'THE PERIMETER', hint: 'окружение · внешние силы' },
       { id: 'hidden', title: 'Скрытый джекпот', sub: 'THE HIDDEN', hint: 'надежды и страхи · что под грифом' },
       { id: 'output', title: 'Итог', sub: 'THE OUTPUT', hint: 'что выдаст система · финал тика' },
+    ],
+  },
+  {
+    id: 'smallcross',
+    num: '04',
+    title: 'МАЛЫЙ КРЕСТ',
+    titleEn: 'SMALL CELTIC CROSS',
+    tagline: 'крестовина без посоха',
+    desc: 'Шесть карт — очищенная крестовина Полного Дампа: без посоха, только суть, помеха, корни и цель. Когда нужен честный сигнал, а не полный аудит.',
+    positions: [
+      { id: 'core', title: 'Суть', sub: 'THE CORE', hint: 'ситуация в фокусе' },
+      { id: 'crossing', title: 'Помеха', sub: 'THE CROSSING', hint: 'что пересекает путь' },
+      { id: 'root', title: 'Архив', sub: 'THE PAST', hint: 'что позади · корни дела' },
+      { id: 'vector', title: 'Вектор', sub: 'THE VECTOR', hint: 'что впереди · ближайший тик' },
+      { id: 'crown', title: 'Венчающий', sub: 'THE CROWN', hint: 'цель и вершина' },
+      { id: 'foundation', title: 'Фундамент', sub: 'THE BASE', hint: 'на чём всё держится' },
+    ],
+  },
+  {
+    id: 'choice',
+    num: '05',
+    title: 'ВЫБОР',
+    titleEn: 'THE CHOICE',
+    tagline: 'две дороги — один вердикт',
+    desc: 'Семь карт: суть развилки, выгода и цена пути А, выгода и цена пути Б — и совет системы с вероятным исходом.',
+    positions: [
+      { id: 'essence', title: 'Суть выбора', sub: 'THE FORK', hint: 'в чём на самом деле развилка' },
+      { id: 'gainA', title: 'Путь А', sub: 'PATH A // GAIN', hint: 'что даст первый путь' },
+      { id: 'costA', title: 'Путь А · Цена', sub: 'PATH A // COST', hint: 'чем отдастся первый путь' },
+      { id: 'gainB', title: 'Путь Б', sub: 'PATH B // GAIN', hint: 'что даст второй путь' },
+      { id: 'costB', title: 'Путь Б · Цена', sub: 'PATH B // COST', hint: 'чем отдастся второй путь' },
+      { id: 'advice', title: 'Совет', sub: 'THE ADVICE', hint: 'как система советует действовать' },
+      { id: 'outcome', title: 'Вердикт', sub: 'THE OUTCOME', hint: 'вероятный исход' },
     ],
   },
 ];

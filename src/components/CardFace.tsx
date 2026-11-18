@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MAJOR_NUMERALS, type TarotCard } from '../data/cards';
+import { MAJOR_NUMERALS, RANK_NUMERALS, type TarotCard } from '../data/cards';
 import MinorArt from './MinorArt';
 import CardBack from './CardBack';
 import MajorFrame from './MajorFrame';
@@ -51,6 +51,13 @@ export default function CardFace({ card, reversed, faceDown, dealt, glitching, w
               <b>{card.nameEn}</b>
               <span>{card.epithet}</span>
             </div>
+          ) : card.image && imgOk ? (
+            /* младший с нейро-артом — та же рамка, что у старших */
+            <>
+              <img className="card-front-img" src={card.image} alt={card.nameEn} loading="lazy" onError={() => setImgOk(false)} />
+              <div className="card-front-shade" />
+              <MajorFrame numeral={RANK_NUMERALS[card.rank!]} title={card.nameEn} epithet={card.epithet} />
+            </>
           ) : (
             <MinorArt card={card} />
           )}

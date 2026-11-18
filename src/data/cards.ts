@@ -79,6 +79,15 @@ const MAJOR_IMAGE: Record<number, string> = {
   21: 'cards/major/21-world.jpg',
 };
 
+/* Нейро-арт младших (постепенно заменяет процедурный SVG) */
+const MINOR_IMAGE: Record<string, string> = {
+  'swords-1': 'cards/minor/swords-1.jpg',
+  'banks-1': 'cards/minor/banks-1.jpg',
+  'wires-1': 'cards/minor/wires-1.jpg',
+  'nuyen-1': 'cards/minor/nuyen-1.jpg',
+  'swords-12': 'cards/minor/swords-12.jpg',
+};
+
 export const MAJOR_NUMERALS = [
   '0', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X',
   'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI',
@@ -111,6 +120,7 @@ const minor = (
   epithet, nameRu,
   suitEn: SUIT_META[suit].nameEn, suitRu: SUIT_META[suit].nameRu,
   keywords, upright, reversed,
+  image: MINOR_IMAGE[`${suit}-${rank}`],
 });
 
 export const CARDS: TarotCard[] = [

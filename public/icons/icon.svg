@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#05070d"/>
+  <g fill="none" stroke-linecap="round">
+    <!-- outer tech ring -->
+    <circle cx="256" cy="256" r="196" stroke="#00f0ff" stroke-width="10" opacity="0.95"/>
+    <circle cx="256" cy="256" r="164" stroke="#00f0ff" stroke-width="4" stroke-dasharray="26 14" opacity="0.8"/>
+    <circle cx="256" cy="256" r="120" stroke="#ff2ea6" stroke-width="5" opacity="0.9"/>
+    <!-- circuit spokes -->
+    <g stroke="#00f0ff" stroke-width="8" opacity="0.9">
+      <path d="M256 28v44M256 440v44M28 256h44M440 256h44"/>
+      <path d="M95 95l31 31M417 95l-31 31M95 417l31-31M417 417l-31-31"/>
+    </g>
+    <!-- eye almond -->
+    <path d="M96 256c54-74 116-108 160-108s106 34 160 108c-54 74-116 108-160 108s-106-34-160-108z" stroke="#ff2ea6" stroke-width="12" stroke-linejoin="round"/>
+    <!-- pupil -->
+    <circle cx="256" cy="256" r="56" stroke="#00f0ff" stroke-width="10"/>
+    <circle cx="256" cy="256" r="16" fill="#ff2ea6" stroke="none"/>
+  </g>
+</svg>

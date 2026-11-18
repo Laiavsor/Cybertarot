@@ -104,6 +104,11 @@ const MINOR_IMAGE: Record<string, string> = {
   'banks-7': 'cards/minor/banks-7.jpg',
   'banks-8': 'cards/minor/banks-8.jpg',
   'banks-9': 'cards/minor/banks-9.jpg',
+  'banks-10': 'cards/minor/banks-10.jpg',
+  'banks-11': 'cards/minor/banks-11.jpg',
+  'banks-12': 'cards/minor/banks-12.jpg',
+  'banks-13': 'cards/minor/banks-13.jpg',
+  'banks-14': 'cards/minor/banks-14.jpg',
   'wires-1': 'cards/minor/wires-1.jpg',
   'nuyen-1': 'cards/minor/nuyen-1.jpg',
 };
